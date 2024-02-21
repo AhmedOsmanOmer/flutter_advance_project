@@ -10,8 +10,8 @@ class AppRegex {
         .hasMatch(password);
   }
 
-    static bool isPhoneNumberValid(String phoneNumber) {
-    return RegExp(r'^(010|011|012|015)[0-9]{8}$').hasMatch(phoneNumber);
+  static bool isPhoneNumberValid(String phoneNumber) {
+    return RegExp(r'^(05)[0-9]{8}$').hasMatch(phoneNumber);
   }
 
   static bool hasLowerCase(String password) {
@@ -29,6 +29,7 @@ class AppRegex {
   static bool hasSpecialCharacter(String password) {
     return RegExp(r'^(?=.*?[#?!@$%^&*-])').hasMatch(password);
   }
+
 
   static bool hasMinLength(String password) {
     return RegExp(r'^(?=.{8,})').hasMatch(password);
