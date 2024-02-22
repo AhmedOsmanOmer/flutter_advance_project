@@ -1,16 +1,3 @@
-# rick_and_morty
+Sign up Screen And Api were created  
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![WhatsApp Image 2024-02-21 at 23 53 32_fbd13a4f](https://github.com/AhmedOsmanOmer/flutter_advance_project/assets/77662412/8b8f81db-3e60-48ee-ab7f-a1dba230ace9)
