@@ -15,34 +15,6 @@ class EmailAndPassword extends StatefulWidget {
 class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObscureText = true;
 
-  bool hasLowercase = false;
-  bool hasUppercase = false;
-  bool hasSpecialCharacters = false;
-  bool hasNumber = false;
-  bool hasMinLength = false;
-
-  late TextEditingController passwordController;
-
-  @override
-  void initState() {
-    super.initState();
-    passwordController = context.read<LoginCubit>().passwordController;
-    setupPasswordControllerListener();
-  }
-
-  void setupPasswordControllerListener() {
-    passwordController.addListener(() {
-      setState(() {
-        hasLowercase = AppRegex.hasLowerCase(passwordController.text);
-        hasUppercase = AppRegex.hasUpperCase(passwordController.text);
-        hasSpecialCharacters =
-            AppRegex.hasSpecialCharacter(passwordController.text);
-        hasNumber = AppRegex.hasNumber(passwordController.text);
-        hasMinLength = AppRegex.hasMinLength(passwordController.text);
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -79,32 +51,13 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               if (value == null || value.isEmpty) {
                 return 'Please enter a valid password';
               }
-              if(value.length<6){
-                return  "Password should be at least 8 characters long";
+              if (value.length < 6) {
+                return "Password should be at least 6 characters long";
               }
-              if(!AppRegex.hasNumber(value)){
-                return  "Should contain at least one number.";
-              }
-              if(!AppRegex.hasLowerCase(value)){
-                return   "Should contain at least one lowercase letter.";
-              }
-              if (!AppRegex.hasSpecialCharacter(value)) {
-                return  "Should contain at least one special character.";
-              }
-              if(!AppRegex.hasUpperCase(value)){
-                return  "Should contain at least one uppercase letter.";
-              }
-              
-            },
+             },
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    passwordController.dispose();
-    super.dispose();
   }
 }
