@@ -20,6 +20,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    print("????????????????????????????????????????????????????????");
+    context.read<LoginCubit>().phone_val();
+    super.initState();
+  }
+
   bool isObsecureText = true;
   @override
   Widget build(BuildContext context) {
@@ -61,8 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const TermsAndConditionsText(),
                   verticalSpace(40),
                   const DontHaveAccountText(),
-
-                   const LoginBlocListener(),
+                  const LoginBlocListener(),
                 ],
               ),
             ],
@@ -73,7 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void validateThenDoLogin(BuildContext context) {
-
     if (context.read<LoginCubit>().formKey.currentState!.validate()) {
       context.read<LoginCubit>().emitLoginStates();
     }

@@ -1,6 +1,6 @@
 {
-    "name": "rick_and_morty",
-    "short_name": "rick_and_morty",
+    "name": "flutter_advanced_project",
+    "short_name": "flutter_advanced_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

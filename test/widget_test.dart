@@ -6,15 +6,15 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_advance/core/routing/app_router.dart';
+import 'package:flutter_advance/doc_app.dart';
 import 'package:flutter_test/flutter_test.dart';
-//import 'package:rick_and_morty_app/app_router.dart';
-//import 'package:rick_and_morty_app/main.dart';
 
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-   // await tester.pumpWidget( RickAndMortyApp(AppRouter()));
+    await tester.pumpWidget( DocApp(appRouter: AppRouter()));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
