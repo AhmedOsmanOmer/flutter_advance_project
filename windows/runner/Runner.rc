@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "rick_and_morty" "\0"
+            VALUE "FileDescription", "flutter_advanced_project" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "rick_and_morty" "\0"
+            VALUE "InternalName", "flutter_advanced_project" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "rick_and_morty.exe" "\0"
-            VALUE "ProductName", "rick_and_morty" "\0"
+            VALUE "OriginalFilename", "flutter_advanced_project.exe" "\0"
+            VALUE "ProductName", "flutter_advanced_project" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
