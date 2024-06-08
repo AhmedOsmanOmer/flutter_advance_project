@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advance/core/helpers/constants.dart';
+import 'package:flutter_advance/core/helpers/shared_pref_helper.dart';
+import 'package:flutter_advance/core/networking/dio_factory.dart';
 import 'package:flutter_advance/features/login/data/models/login_request_body.dart';
-import 'package:flutter_advance/features/login/data/repo/login_repo.dart';
+import 'package:flutter_advance/features/login/data/repos/login_repo.dart';
 import 'package:flutter_advance/features/login/logic/cubit/login_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepo _loginRepo;
@@ -21,20 +24,15 @@ class LoginCubit extends Cubit<LoginState> {
         password: passwordController.text,
       ),
     );
-    response.when(success: (loginResponse) {
+    response.when(success: (loginResponse) async {
+      await saveUserToken(loginResponse.userData?.token ?? '');
       emit(LoginState.success(loginResponse));
     }, failure: (error) {
-      emit(LoginState.error(error: error.apiErrorsModel.message ?? ''));
+      emit(LoginState.error(error: error.apiErrorModel.message ?? ''));
     });
   }
 
-  phone_val()async{
-  await FirebaseAuth.instance.verifyPhoneNumber(
-  phoneNumber: '+971582857929',
-  verificationCompleted: (PhoneAuthCredential credential) {},
-  verificationFailed: (FirebaseAuthException e) {},
-  codeSent: (String verificationId, int? resendToken) {},
-  codeAutoRetrievalTimeout: (String verificationId) {},
-);
+  Future<void> saveUserToken(String token) async {
+    DioFactory.setTokenIntoHeaderAfterLogin(token);
   }
 }

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advance/core/theming/spacing.dart';
-import 'package:flutter_advance/features/login/ui/widgets/terms_and_conditions.dart';
 import 'package:flutter_advance/features/sign_up/ui/widgets/sign_up_bloc_listener.dart';
-import 'package:flutter_advance/features/sign_up/ui/widgets/already_have_account.dart';
 import 'package:flutter_advance/features/sign_up/ui/widgets/sign_up_form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../core/helpers/spacing.dart';
 import '../../../core/theming/styles.dart';
 import '../../../core/widgets/app_text_button.dart';
+import '../../login/ui/widgets/terms_and_conditions_text.dart';
 import '../logic/sign_up_cubit.dart';
+import 'widgets/already_have_account_text.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  const SignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +47,8 @@ class SignUpScreen extends StatelessWidget {
                     verticalSpace(16),
                     const TermsAndConditionsText(),
                     verticalSpace(30),
-                    const AlreadyHaveAccount(),
-                    const SignUpBlocListener(),
+                    const AlreadyHaveAccountText(),
+                    const SignupBlocListener(),
                   ],
                 ),
               ],
@@ -61,12 +60,8 @@ class SignUpScreen extends StatelessWidget {
   }
 
   void validateThenDoSignup(BuildContext context) {
-    if (context.read<SignUpCubit>().formKey.currentState!.validate()) {
-      context.read<SignUpCubit>().emitSignUpStates();
+    if (context.read<SignupCubit>().formKey.currentState!.validate()) {
+      context.read<SignupCubit>().emitSignupStates();
     }
   }
-}
-
-class SignupBlocListener {
-  const SignupBlocListener();
 }

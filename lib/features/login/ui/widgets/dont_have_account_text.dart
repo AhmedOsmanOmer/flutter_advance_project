@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_advance/core/helpers/extentios.dart';
+import 'package:flutter_advance/core/helpers/extensions.dart';
 import 'package:flutter_advance/core/routing/routes.dart';
+
 
 import '../../../../core/theming/styles.dart';
 
@@ -16,7 +17,7 @@ class DontHaveAccountText extends StatelessWidget {
         children: [
           TextSpan(
             text: 'Don\'t have an account?',
-            style: TextStyles.font14DarkBlueMedium,
+            style: TextStyles.font13DarkBlueRegular,
           ),
           TextSpan(
             text: ' Sign Up',
