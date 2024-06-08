@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_advance/core/theming/styles.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../core/theming/styles.dart';
 
 class DoctorImageAndText extends StatelessWidget {
   const DoctorImageAndText({super.key});
@@ -14,22 +14,29 @@ class DoctorImageAndText extends StatelessWidget {
         Container(
           foregroundDecoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.white, Colors.white.withOpacity(0.0)],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                stops: const [0.14, 0.4]),
+              colors: [
+                Colors.white,
+                Colors.white.withOpacity(0.0),
+              ],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              stops: const [0.14, 0.4],
+            ),
           ),
-          child: Image.asset('assets/images/doctor.png'),
+          child: Image.asset('assets/images/onboarding_doctor.png'),
         ),
         Positioned(
-            left: 0,
-            right: 0,
-            bottom: 30,
-            child: Text(
-              "Best Doctor\nAppointment App",
-              style: TextStyles.font32BlueBold.copyWith(height: 1.4),
-              textAlign: TextAlign.center,
-            ))
+          bottom: 30,
+          left: 0,
+          right: 0,
+          child: Text(
+            'Best Doctor\nAppointment App',
+            textAlign: TextAlign.center,
+            style: TextStyles.font32BlueBold.copyWith(
+              height: 1.4,
+            ),
+          ),
+        ),
       ],
     );
   }

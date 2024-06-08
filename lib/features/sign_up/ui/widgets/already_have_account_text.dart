@@ -1,12 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_advance/core/helpers/extentios.dart';
-import 'package:flutter_advance/core/routing/routes.dart';
-
+import 'package:flutter_advance/core/helpers/extensions.dart';
+import '../../../../core/routing/routes.dart';
 import '../../../../core/theming/styles.dart';
 
-class AlreadyHaveAccount extends StatelessWidget {
-  const AlreadyHaveAccount({super.key});
+class AlreadyHaveAccountText extends StatelessWidget {
+  const AlreadyHaveAccountText({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +15,7 @@ class AlreadyHaveAccount extends StatelessWidget {
         children: [
           TextSpan(
             text: 'Already have an account?',
-            style: TextStyles.font14DarkBlueMedium,
+            style: TextStyles.font13DarkBlueRegular,
           ),
           TextSpan(
             text: ' Login',

@@ -1,6 +1,7 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_advance/core/helpers/spacing.dart';
 import 'package:flutter_advance/core/theming/colors.dart';
-import 'package:flutter_advance/core/theming/spacing.dart';
+
 
 import '../../../../core/theming/styles.dart';
 
@@ -57,4 +58,4 @@ class PasswordValidations extends StatelessWidget {
       ],
     );
   }
-}*/
+}

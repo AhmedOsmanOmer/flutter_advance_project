@@ -6,8 +6,8 @@ part of 'sign_up_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SignUpResponse _$SignUpResponseFromJson(Map<String, dynamic> json) =>
-    SignUpResponse(
+SignupResponse _$SignupResponseFromJson(Map<String, dynamic> json) =>
+    SignupResponse(
       message: json['message'] as String?,
       userData: json['data'] == null
           ? null
@@ -16,7 +16,7 @@ SignUpResponse _$SignUpResponseFromJson(Map<String, dynamic> json) =>
       code: json['code'] as int?,
     );
 
-Map<String, dynamic> _$SignUpResponseToJson(SignUpResponse instance) =>
+Map<String, dynamic> _$SignupResponseToJson(SignupResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
       'data': instance.userData,

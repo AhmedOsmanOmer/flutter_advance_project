@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advance/features/sign_up/data/models/sign_up_request_body.dart';
-import 'package:flutter_advance/features/sign_up/data/repo/sign_up_repo.dart';
+import 'package:flutter_advance/features/sign_up/data/repos/sign_up_repo.dart';
 import 'package:flutter_advance/features/sign_up/logic/sign_up_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SignUpCubit extends Cubit<SignUpState> {
-  final SignUpRepo _signUpRepo;
-  SignUpCubit(this._signUpRepo) : super(const SignUpState.initial());
+
+import '../data/models/sign_up_request_body.dart';
+
+class SignupCubit extends Cubit<SignupState> {
+  final SignupRepo _signupRepo;
+  SignupCubit(this._signupRepo) : super(const SignupState.initial());
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordConfirmController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmationController =
+      TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-  void emitSignUpStates() async {
-    emit(const SignUpState.signupLoading());
-    final response = await _signUpRepo.login(
-      SignUpRequestBody(
-        email: emailController.text,
-        password: passwordController.text,
-        gender: 0,
+  void emitSignupStates() async {
+    emit(const SignupState.signupLoading());
+    final response = await _signupRepo.signup(
+      SignupRequestBody(
         name: nameController.text,
-        passwordConfirmation: passwordConfirmController.text,
-        phone: phoneController.text
+        email: emailController.text,
+        phone: phoneController.text,
+        password: passwordController.text,
+        passwordConfirmation: passwordConfirmationController.text,
+        gender: 0,
       ),
     );
-    response.when(success: (signUpResponse) {
-      emit(SignUpState.signupSuccess(signUpResponse));
+    response.when(success: (signupResponse) {
+      emit(SignupState.signupSuccess(signupResponse));
     }, failure: (error) {
-      emit(SignUpState.signupError(error: error.apiErrorsModel.message ?? ''));
+      emit(SignupState.signupError(error: error.apiErrorModel.message ?? ''));
     });
   }
 }

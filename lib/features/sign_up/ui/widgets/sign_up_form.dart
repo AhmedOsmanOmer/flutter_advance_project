@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advance/core/helpers/app_regex.dart';
-import 'package:flutter_advance/core/theming/spacing.dart';
 import 'package:flutter_advance/features/sign_up/logic/sign_up_cubit.dart';
-import 'package:flutter_advance/features/sign_up/ui/widgets/phone_number_field.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import '../../../../core/helpers/spacing.dart';
 import '../../../../core/widgets/app_text_form_field.dart';
+import '../../../login/ui/widgets/password_validations.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});
@@ -17,10 +16,39 @@ class SignupForm extends StatefulWidget {
 class _SignupFormState extends State<SignupForm> {
   bool isPasswordObscureText = true;
   bool isPasswordConfirmationObscureText = true;
+
+  bool hasLowercase = false;
+  bool hasUppercase = false;
+  bool hasSpecialCharacters = false;
+  bool hasNumber = false;
+  bool hasMinLength = false;
+
+  late TextEditingController passwordController;
+
+  @override
+  void initState() {
+    super.initState();
+    passwordController = context.read<SignupCubit>().passwordController;
+    setupPasswordControllerListener();
+  }
+
+  void setupPasswordControllerListener() {
+    passwordController.addListener(() {
+      setState(() {
+        hasLowercase = AppRegex.hasLowerCase(passwordController.text);
+        hasUppercase = AppRegex.hasUpperCase(passwordController.text);
+        hasSpecialCharacters =
+            AppRegex.hasSpecialCharacter(passwordController.text);
+        hasNumber = AppRegex.hasNumber(passwordController.text);
+        hasMinLength = AppRegex.hasMinLength(passwordController.text);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: context.read<SignUpCubit>().formKey,
+      key: context.read<SignupCubit>().formKey,
       child: Column(
         children: [
           AppTextFormField(
@@ -30,18 +58,10 @@ class _SignupFormState extends State<SignupForm> {
                 return 'Please enter a valid name';
               }
             },
-            controller: context.read<SignUpCubit>().nameController,
+            controller: context.read<SignupCubit>().nameController,
           ),
           verticalSpace(18),
-          PhoneNubmerField(
-            validator: (val) {
-              if (!val!.isValidNumber()) {
-                return "Invalid phone number";
-              }
-              return "";
-            },
-          ),
-          /*AppTextFormField(
+          AppTextFormField(
             hintText: 'Phone number',
             validator: (value) {
               if (value == null ||
@@ -50,8 +70,8 @@ class _SignupFormState extends State<SignupForm> {
                 return 'Please enter a valid phone number';
               }
             },
-            controller: context.read<SignUpCubit>().phoneController,
-          )*/
+            controller: context.read<SignupCubit>().phoneController,
+          ),
           verticalSpace(18),
           AppTextFormField(
             hintText: 'Email',
@@ -62,44 +82,33 @@ class _SignupFormState extends State<SignupForm> {
                 return 'Please enter a valid email';
               }
             },
-            controller: context.read<SignUpCubit>().emailController,
+            controller: context.read<SignupCubit>().emailController,
           ),
           verticalSpace(18),
           AppTextFormField(
-              controller: context.read<SignUpCubit>().passwordController,
-              hintText: 'Password',
-              isObscureText: isPasswordObscureText,
-              suffixIcon: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isPasswordObscureText = !isPasswordObscureText;
-                  });
-                },
-                child: Icon(
-                  isPasswordObscureText
-                      ? Icons.visibility_off
-                      : Icons.visibility,
-                ),
+            controller: context.read<SignupCubit>().passwordController,
+            hintText: 'Password',
+            isObscureText: isPasswordObscureText,
+            suffixIcon: GestureDetector(
+              onTap: () {
+                setState(() {
+                  isPasswordObscureText = !isPasswordObscureText;
+                });
+              },
+              child: Icon(
+                isPasswordObscureText ? Icons.visibility_off : Icons.visibility,
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a valid password';
-                }
-                if (context.read<SignUpCubit>().passwordController.text !=
-                    context
-                        .read<SignUpCubit>()
-                        .passwordConfirmController
-                        .text) {
-                  return 'Password  and confirmation do not match';
-                }
-                if (context.read<SignUpCubit>().passwordController.text.length <
-                    6) {
-                  return "Password should be at least 6 characters long";
-                }
-              }),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter a valid password';
+              }
+            },
+          ),
           verticalSpace(18),
           AppTextFormField(
-            controller: context.read<SignUpCubit>().passwordConfirmController,
+            controller:
+                context.read<SignupCubit>().passwordConfirmationController,
             hintText: 'Password Confirmation',
             isObscureText: isPasswordConfirmationObscureText,
             suffixIcon: GestureDetector(
@@ -119,18 +128,24 @@ class _SignupFormState extends State<SignupForm> {
               if (value == null || value.isEmpty) {
                 return 'Please enter a valid password';
               }
-              if (context.read<SignUpCubit>().passwordController.text !=
-                  context.read<SignUpCubit>().passwordConfirmController.text) {
-                return 'Password  and confirmation do not match';
-              }
-              if (context.read<SignUpCubit>().passwordController.text.length <
-                  6) {
-                return "Password should be at least 6 characters long";
-              }
             },
+          ),
+          verticalSpace(24),
+          PasswordValidations(
+            hasLowerCase: hasLowercase,
+            hasUpperCase: hasUppercase,
+            hasSpecialCharacters: hasSpecialCharacters,
+            hasNumber: hasNumber,
+            hasMinLength: hasMinLength,
           ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
   }
 }
