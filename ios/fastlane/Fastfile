@@ -1,0 +1,16 @@
+default_platform(:ios)
+platform :ios do
+  desc "Lane for IOS Firebase App Distribution"
+  lane :firebase_distribution do
+    sh "flutter clean"
+    sh "flutter build ios --release --target lib/main_production.dart --no-tree-shake-icons"
+    firebase_app_distribution(
+        app: "1:924796587829:android:e40fd6720ac651a640867c",
+        firebase_cli_token: '1//03RoD6d1JT5a1CgYIARAAGAMSNwF-L9IrOomUtXW5Lexh_UH4OgtvL0HYcix4U5xnlnjzC-vNThGSJZJI29lW7wRvNhVAENwbsGs',
+        android_artifact_type: "APK",
+        android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
+        testers: "ahmedosmanomer11@gmail.com",
+        release_notes: "Testing something with GitHub Actions, trying to push directly from master branch",
+  )
+  end
+end
