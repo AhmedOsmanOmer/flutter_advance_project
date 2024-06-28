@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advance/core/helpers/spacing.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
